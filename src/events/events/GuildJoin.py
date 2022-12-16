@@ -12,4 +12,5 @@ class GuildJoin(EventBlueprint):
         self.manager.client.remove_listener(self.on_guild_join)
 
     async def on_guild_join(self, guild: Guild):
+        self.manager.client.logger.info(f"Guild Joined [ID: {guild.id}]")
         await self.manager.client.updater.update_counter(guild.id)

@@ -2,6 +2,7 @@ from .EventManagerBlueprint import EventManagerBlueprint
 from .events import (
     CommandError,
     GuildJoin,
+    GuildRemove,
     MemberJoin,
     MemberRemove,
     Shards
@@ -19,6 +20,7 @@ class EventManager(EventManagerBlueprint):
     def register(self):
         self.events.append(CommandError(self))
         self.events.append(GuildJoin(self))
+        self.events.append(GuildRemove(self))
         self.events.append(MemberJoin(self))
         self.events.append(MemberRemove(self))
         self.events.append(Shards(self))
