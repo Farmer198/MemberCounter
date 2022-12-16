@@ -131,7 +131,7 @@ class Servers:
 
             if info is None:
                 info = self.create_server(guild_id)
-                self._cache[guild_id] = Server(self, dict(self, zip(list(Tags.to_dict()), info)))
+                self._cache[guild_id] = Server(self, dict(zip(list(Tags.to_dict()), info)))
             else:
                 self._cache[guild_id] = Server(self, dict(zip(list(Tags.to_dict()), info)))
             cursor.close()
