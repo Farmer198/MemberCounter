@@ -50,7 +50,7 @@ class MemberCounter(AutoShardedBot):
         self.logger = Logger(self, 'MemberCounter')
 
         # initializing gitinfo
-        self.gitinfo = Gitinfo()
+        self.gitinfo = Gitinfo(self)
 
         # initializing database
         self.servers = Servers(self)
