@@ -12,4 +12,6 @@ class MemberRemove(EventBlueprint):
         self.manager.client.remove_listener(self.on_raw_member_remove)
 
     async def on_raw_member_remove(self, payload: RawMemberRemoveEvent):
+        if payload.user.id == self.manager.client.user.id:
+            return
         await self.manager.client.updater.update_counter(payload.guild_id)
