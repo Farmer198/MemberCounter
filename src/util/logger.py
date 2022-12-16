@@ -9,22 +9,22 @@ class ColoredFormatter(logging.Formatter):
         if record.levelno == logging.WARNING:
             record.msg = colored(text = record.msg, color = 'yellow')
             record.levelname = colored(text = f"{record.levelname:<8}", color = 'yellow')
-            record.name = colored(text = f"{record.name:<20}", color = 'yellow')
+            record.name = colored(text = f"{record.name:<15}", color = 'yellow')
 
         if record.levelno == logging.ERROR:
             record.msg = colored(text = record.msg, color = 'red')
             record.levelname = colored(text = f"{record.levelname:<8}", color = 'red')
-            record.name = colored(text = f"{record.name:<20}", color = 'red')
+            record.name = colored(text = f"{record.name:<15}", color = 'red')
 
         if record.levelno == logging.DEBUG:
             record.msg = colored(text = record.msg, color = 'blue')
             record.levelname = colored(text = f"{record.levelname:<8}", color = 'blue')
-            record.name = colored(text = f"{record.name:<20}", color = 'blue')
+            record.name = colored(text = f"{record.name:<15}", color = 'blue')
 
         if record.levelno == logging.INFO:
             record.msg = colored(text = record.msg, color = 'cyan')
             record.levelname = colored(text = f"{record.levelname:<8}", color = 'cyan')
-            record.name = colored(text = f"{record.name:<20}", color = 'cyan')
+            record.name = colored(text = f"{record.name:<15}", color = 'cyan')
 
         # not colored
         return logging.Formatter.format(self, record)
@@ -58,7 +58,7 @@ class Logger(logging.Logger):
     def setup_console_logger(self):
         # format's
         dt_fmt = '%Y-%m-%d %H:%M:%S'
-        log_fmt = '[{asctime}] [{levelname:<8}] [{name:<20}] >>> {message}'
+        log_fmt = '[{asctime}] [{levelname:<8}] [{name:<15}] >>> {message}'
         formatter = ColoredFormatter(log_fmt, dt_fmt, style='{') 
 
         console_handler = logging.StreamHandler()
@@ -72,7 +72,7 @@ class Logger(logging.Logger):
     def setup_file_logger(self):
         # format's
         dt_fmt = '%Y-%m-%d %H:%M:%S'
-        log_fmt = '[{asctime}] [{levelname:<8}] [{name:<20}] >>> {message}'
+        log_fmt = '[{asctime}] [{levelname:<8}] [{name:<15}] >>> {message}'
         formatter = logging.Formatter(log_fmt, dt_fmt, style='{')
 
         file_handler = logging.handlers.RotatingFileHandler(
