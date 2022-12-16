@@ -9,6 +9,7 @@ from discord import (
 )
 from discord.ext.commands import AutoShardedBot
 from util import (
+    Uptimer,
     CounterUpdater,
     Gitinfo,
     Logger
@@ -43,7 +44,7 @@ class MemberCounter(AutoShardedBot):
         self.dirname = dirname
 
         # embed color
-        self.color = Color.dark_orange()
+        self.color = Color.from_str("#05ffe6")
 
         # initializing logger
         self.logger = Logger(self, 'MemberCounter')
@@ -61,7 +62,11 @@ class MemberCounter(AutoShardedBot):
         # initializing updater
         self.updater = CounterUpdater(self)
 
+        # initializing uptimer
+        self.uptimer = Uptimer(self)
+
     def boot(self, token: str, *, reconnect: bool = True) -> None:
+        self.uptimer.start()
         self.run(token, reconnect = reconnect, log_handler = None)
 
     async def on_ready(self):
