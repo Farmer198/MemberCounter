@@ -1,0 +1,16 @@
+!/.gitignore
+__pycache__/
+*/__pycache__/
+data/
+logs/
+test*
+config.yml
+.cache
+.vscode
+.vs
+.env
+*.log
+*.log.*
+*.db
+*.env
+*.idea

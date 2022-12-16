@@ -1,0 +1,8 @@
+# required
+DISCORD_TOKEN=
+INVITECODE=67110912
+
+# booting methode
+SHARDS=1
+SHARD_IDS='[0]'
+SLASH_SYNC=TRUE
