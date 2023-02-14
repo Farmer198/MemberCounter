@@ -1,10 +1,19 @@
+from __future__ import annotations
+
 import discord
 
 from discord import app_commands
 from discord.ext import commands
-from MemberCounter import MemberCounter
+from typing import TYPE_CHECKING
 
-async def setup(bot):
+__all__ = (
+    'uptime'
+)
+
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
+async def setup(bot: MemberCounter):
     await bot.add_cog(uptime(bot))
 
 class uptime(commands.Cog):

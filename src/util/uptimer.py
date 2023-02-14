@@ -1,8 +1,24 @@
+from __future__ import annotations
+
 import time
+from typing import TYPE_CHECKING
+
+__all__ = (
+    'Uptimer'
+)
+
+if TYPE_CHECKING:
+    from ..MemberCounter import MemberCounter
 
 class Uptimer:
-    def __init__(self, bot) -> None:
-        self.bot = bot
+
+    __slots__ = (
+        'client',
+        'starttime'
+    )
+
+    def __init__(self, client: MemberCounter) -> None:
+        self.client: MemberCounter = client
         self.starttime: float = 0
 
     @property

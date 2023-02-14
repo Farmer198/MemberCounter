@@ -1,11 +1,19 @@
+from __future__ import annotations
+
 import discord
 
 from discord import app_commands
 from discord.ext import commands
-from typing import Optional
-from MemberCounter import MemberCounter
+from typing import TYPE_CHECKING, Optional
 
-async def setup(bot):
+__all__ = (
+    'countbots'
+)
+
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
+async def setup(bot: MemberCounter):
     await bot.add_cog(countbots(bot))
 
 class countbots(commands.Cog):

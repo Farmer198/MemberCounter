@@ -1,9 +1,18 @@
-from typing import List
-from discord import Client
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, List
 from .Exeptions import NotImplementedError
 
+__all__ = (
+    'EventManagerBlueprint',
+    'EventBlueprint'
+)
+
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
 class EventManagerBlueprint:
-    client: Client
+    client: MemberCounter
     events: List
 
 class EventBlueprint:

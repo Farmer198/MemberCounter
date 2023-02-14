@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, List
 from .EventManagerBlueprint import EventManagerBlueprint
 from .events import (
     CommandError,
@@ -8,16 +11,23 @@ from .events import (
     Shards
 )
 
-class EventManager(EventManagerBlueprint):
-    def __init__(self, client) -> None:
-        self.client = client
-        self.events = []
+__all__ = (
+    'EventManager'
+)
 
-    def start(self):
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
+class EventManager(EventManagerBlueprint):
+    def __init__(self, client: MemberCounter) -> None:
+        self.client: MemberCounter = client
+        self.events: List = []
+
+    def start(self) -> None:
         self.register()
         self.load()
 
-    def register(self):
+    def register(self) -> None:
         self.events.append(CommandError(self))
         self.events.append(GuildJoin(self))
         self.events.append(GuildRemove(self))
@@ -25,5 +35,5 @@ class EventManager(EventManagerBlueprint):
         self.events.append(MemberRemove(self))
         self.events.append(Shards(self))
 
-    def load(self):
+    def load(self) -> None:
         [event.load() for event in self.events]

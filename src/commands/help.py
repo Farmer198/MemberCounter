@@ -1,11 +1,19 @@
+from __future__ import annotations
+
 import discord
 
 from discord.ext import commands
 from discord import app_commands
+from typing import TYPE_CHECKING
 
-from MemberCounter import MemberCounter
+__all__ = (
+    'help'
+)
 
-async def setup(bot):
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
+async def setup(bot: MemberCounter):
     await bot.add_cog(help(bot))
 
 class help(commands.Cog):

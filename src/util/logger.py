@@ -1,8 +1,13 @@
+from __future__ import annotations
+
 import os
 import logging
 import logging.handlers
 from termcolor import colored
-from typing import List
+from typing import List, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..MemberCounter import MemberCounter
 
 class ColoredFormatter(logging.Formatter):
     def format(self, record):
@@ -30,10 +35,10 @@ class ColoredFormatter(logging.Formatter):
         return logging.Formatter.format(self, record)
 
 class Logger(logging.Logger):
-    def __init__(self, client, name: str, level = logging.INFO) -> None:
+    def __init__(self, client: MemberCounter, name: str, level = logging.INFO) -> None:
         super().__init__(name, level)
 
-        self.client = client
+        self.client: MemberCounter = client
         self.extra_loggers: List[logging.Logger] = []
 
         # check directory

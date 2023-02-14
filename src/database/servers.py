@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from discord import Guild
 from time import time
@@ -7,7 +9,16 @@ from sqlite3 import (
 )
 
 from enum import Enum
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
+
+__all__ = (
+    'Tags',
+    'Server',
+    'Servers'
+)
+
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
 
 class Tags(Enum):
     guild_id = "guild_id"
@@ -21,7 +32,12 @@ class Tags(Enum):
         return dct
 
 class Server:
-    __slots__ = ("manager", "guild_id", "count_bots", "last_update")
+    __slots__ = (
+        "manager",
+        "guild_id",
+        "count_bots",
+        "last_update"
+    )
 
     def __init__(self, manager, data: dict) -> None:
         self.manager: Servers = manager
@@ -62,8 +78,15 @@ class Server:
         return self.manager.client.get_guild(self.guild_id)
 
 class Servers:
-    def __init__(self, client) -> None:
-        self.client = client
+
+    __slots__ = (
+        'client',
+        '_cache',
+        'db'
+    )
+    
+    def __init__(self, client: MemberCounter) -> None:
+        self.client: MemberCounter = client
         self._cache: dict = {}
 
         # check path

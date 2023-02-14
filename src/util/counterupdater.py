@@ -1,9 +1,24 @@
+from __future__ import annotations
+
 from discord import Guild
 from time import time
+from typing import TYPE_CHECKING
+
+__all__ = (
+    'CounterUpdate'
+)
+
+if TYPE_CHECKING:
+    from ..MemberCounter import MemberCounter
 
 class CounterUpdater:
-    def __init__(self, client) -> None:
-        self.client = client
+
+    __slots__ = (
+        'client'
+    )
+
+    def __init__(self, client: MemberCounter) -> None:
+        self.client: MemberCounter = client
 
     async def update_counter(self, guild_id: int):
 
