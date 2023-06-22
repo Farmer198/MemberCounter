@@ -10,10 +10,12 @@ if __name__ == '__main__':
     if os.getenv('DISCORD_TOKEN') is None:
         raise FileNotFoundError('check the env file')
     else:
-        shard_ids = json.loads(os.getenv('SHARD_IDS'))
+        _shards = os.getenv('SHARD_IDS').split(",")
+        shards = list(map(int, _shards)) if _shards is not None or _shards else [0]
+
         instance = MemberCounter(
             shard_count = int(os.getenv('SHARDS')),
-            shard_ids = shard_ids
+            shard_ids = shards
         )
 
         instance.boot(os.getenv('DISCORD_TOKEN'))

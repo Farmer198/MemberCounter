@@ -1,0 +1,9 @@
+__pycache__
+.docker
+.idea
+.venv
+.vs
+.vscode
+assets
+logs
+*.env

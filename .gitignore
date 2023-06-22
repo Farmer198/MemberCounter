@@ -1,16 +1,27 @@
+# Python
 !/.gitignore
 __pycache__/
 */__pycache__/
-data/
+
+# Logging
 logs/
+*.log
+*.log.*
+
+# Venv
+*.venv
+
+data/
 assets/
 test*
 .cache
-.vscode
-.vs
-.env
-*.log
-*.log.*
 *.db
+docker-compose.yml
+
+# ENV
 *.env
+
+# IDE
+*.vscode
+*.vs
 *.idea
