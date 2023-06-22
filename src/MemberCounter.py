@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import os
+import signal
+import asyncio
+
 from time import sleep
 from discord import (
     Intents,
@@ -38,7 +41,7 @@ class MemberCounter(AutoShardedBot):
             shard_count = shard_count,
             shard_ids = shard_ids,
             max_messages = None,
-            chunk_guilds_at_startup = True
+            chunk_guilds_at_startup = False
         )
         # internal 
         self.tree.on_error = self.app_command_error
@@ -66,6 +69,9 @@ class MemberCounter(AutoShardedBot):
 
         # initializing uptimer
         self.uptimer = Uptimer(self)
+
+    async def setup_hook(self) -> None:
+        self.loop.add_signal_handler(signal.SIGTERM, asyncio.create_task, self.exit())
 
     def boot(self, token: str, *, reconnect: bool = True) -> None:
         self.uptimer.start()
@@ -126,6 +132,9 @@ class MemberCounter(AutoShardedBot):
             return
         
         self.ext_loadded = True
+
+    async def exit(self) -> None:
+        await self.close()
 
     @property
     def invite_url(self) -> str:
