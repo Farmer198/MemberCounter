@@ -13,10 +13,10 @@ RUN python3 -m venv .venv
 # Enable venv
 ENV PATH="/opt/membercounter/.venv/bin:$PATH"
 
-COPY requierments.txt .
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip && \ 
-    pip install --no-cache-dir -r requierments.txt
+    pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /opt/membercounter
 

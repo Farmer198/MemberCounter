@@ -1,0 +1,4 @@
+discord.py
+GitPython
+python-dotenv
+termcolor
