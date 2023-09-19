@@ -2,7 +2,7 @@ FROM python:3.11.4-alpine
 
 # Install dependencies
 RUN apk update && \
-    apk add --no-cache git linux-headers gcc libc-dev libffi-dev fortify-headers build-base && \ 
+    apk add --no-cache git linux-headers libffi-dev build-base && \ 
     rm -rf /var/cache/apk/*
 
 WORKDIR /opt/membercounter
@@ -19,8 +19,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requierments.txt
 
 WORKDIR /opt/membercounter
-
-VOLUME [ "/data" ]
 
 COPY . .
 CMD [ "python",  "./src/main.py"]
