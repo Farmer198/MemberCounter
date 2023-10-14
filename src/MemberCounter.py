@@ -7,7 +7,7 @@ import asyncio
 from time import sleep
 from discord import (
     Intents,
-    Activity,
+    CustomActivity,
     ActivityType,
     Status,
     Color
@@ -95,7 +95,7 @@ class MemberCounter(AutoShardedBot):
         # here will be set the bot status for each shard
 
         self.logger.info('Setting activity...')
-        activity = Activity(type = ActivityType.custom, name = "Counting Members")
+        activity = CustomActivity(name = "Counting Members")
         for shard in self.shards:
             await self.change_presence(status = Status.online, activity = activity, shard_id = shard)
 
