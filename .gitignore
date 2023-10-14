@@ -1,27 +1,16 @@
-# Python
-!/.gitignore
-__pycache__/
-*/__pycache__/
-
-# Logging
-logs/
-*.log
-*.log.*
-
-# Venv
-*.venv
-
-data/
-assets/
-test*
-.cache
-*.db
-docker-compose.yml
-
-# ENV
-*.env
-
-# IDE
-*.vscode
-*.vs
-*.idea
+**/__pycache__
+**/*.py[cod]
+**/*.env
+**/.venv
+**/.idea
+**/.vs
+**/.vscode
+**/logs
+**/test
+**/docker-compose*
+**/compose*
+**/config.dev.*
+**/test*
+**/*.tar
+**/data
+**/assets

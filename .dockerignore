@@ -1,9 +1,25 @@
-__pycache__
-.docker
-.idea
-.venv
-.vs
-.vscode
-assets
-logs
-*.env
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+**/__pycache__
+**/*.py[cod]
+**/*.env
+**/.venv
+**/.gitignore
+**/.idea
+**/.vs
+**/.vscode
+**/logs
+**/assets
+**/test
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/config.dev.*
+**/test*
+**/*.tar
+**/data
+README.md
