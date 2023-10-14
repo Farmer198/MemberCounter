@@ -20,13 +20,12 @@ from util import (
     Logger
 )
 from database.servers import Servers
-from events.EventManager import EventManager
 
 from typing import List
 
 dirname = os.path.dirname(os.path.realpath(__file__))
 
-folders = ["commands"]
+folders = ["commands", "events"]
 
 class MemberCounter(AutoShardedBot):
     def __init__(self, shard_count: int, shard_ids: List[int]) -> None:
@@ -59,10 +58,6 @@ class MemberCounter(AutoShardedBot):
 
         # initializing database
         self.servers = Servers(self)
-
-        # initializing events
-        self.eventmanager = EventManager(self)
-        self.eventmanager.start()
 
         # initializing updater
         self.updater = CounterUpdater(self)
@@ -107,28 +102,30 @@ class MemberCounter(AutoShardedBot):
         self.logger.info(f'Activity was changed')
 
     async def load_extensions(self):
-        # here we are loading the extentions 
+        # here we are loading the extensions
         # the folders in the default configuration are loaded here 
-
         try:
             for path in folders:
-                self.logger.info(f'Start to loading {path}...')
-                pathdir = os.path.join(dirname, r"{0}/".format(path))
+                directorys = [i for i in os.listdir(os.path.join(dirname, path)) if os.path.isdir(os.path.join(dirname, path, i))]
 
-                for _file in os.listdir(pathdir):
-                    if _file.endswith('.py'):
-                        try:
-                            await self.load_extension(f'{path}.{_file[0:-3]}')
+                for directory in directorys:
+                    pathdir = os.path.join(dirname, path, directory)
 
-                        except Exception as e:
-                            self.logger.warning(f'Couldn\'t load cog {_file} while {e}')
+                    for _file in os.listdir(pathdir):
+                        if _file.endswith('.py') and not _file.startswith('utils'):
+                            try:
+                                await self.load_extension(f'{path}.{directory}.{_file[0:-3]}')
+                                # self.logger.info(f"Loaded: {_file[0:-3]}")
+
+                            except Exception as e:
+                                self.logger.warning(f'Couldn\'t load cog {_file} while {e}')
 
                 self.logger.info(f'Successfully loaded {path}')
         except Exception as e:
             self.logger.warning(e)
             self.logger.warning(f'Shutdown in 5 sec...')
             sleep(5)
-            await self.close()
+            await self.exit()
             return
         
         self.ext_loadded = True

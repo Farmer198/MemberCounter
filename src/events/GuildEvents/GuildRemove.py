@@ -1,0 +1,23 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+from discord import Guild
+from discord.ext.commands import Cog
+
+__all__ = (
+    'GuildRemove'
+)
+if TYPE_CHECKING:
+    from MemberCounter import MemberCounter
+
+async def setup(bot: MemberCounter):
+    await bot.add_cog(GuildRemove(bot))
+
+
+class GuildRemove(Cog):
+    def __init__(self, bot: MemberCounter) -> None:
+        self.bot: MemberCounter = bot
+
+    async def on_guild_remove(self, guild: Guild) -> None:
+        self.bot.logger.info(f"Guild Removed [ID: {guild.id}]")
+        self.bot.servers.delete_server(guild.id)
